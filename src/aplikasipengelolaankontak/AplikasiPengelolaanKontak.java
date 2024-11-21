@@ -569,12 +569,20 @@ public class AplikasiPengelolaanKontak extends javax.swing.JFrame {
     }//GEN-LAST:event_eksporButtonActionPerformed
 
     private void imporButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imporButtonActionPerformed
-        // TODO add your handling code here:
-        imporButton.addActionListener(e -> {
-            String filePath = "kontak.csv"; // Tentukan path atau gunakan dialog untuk memilih path
+        // Pilih file CSV menggunakan JFileChooser
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(this);
+
+        if (returnValue == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File file = fileChooser.getSelectedFile();
+            String filePath = file.getAbsolutePath();
+
+            // Panggil metode impor dari CSV
             imporDariCSV(filePath);
-            tampilkanKontak(tableModel); // Refresh JTable setelah impor data
-        });
+
+            // Refresh JTable setelah impor
+            tampilkanKontak(tableModel);
+        }
     }//GEN-LAST:event_imporButtonActionPerformed
 
     /**
